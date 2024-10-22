@@ -18,21 +18,27 @@ struct BookRows: View {
                 ForEach($viewModel.books) { $book in
                     NavigationLink(destination: BookDetailView(book: book)) {
                         VStack(alignment: .leading) {
-                            ZStack {
+                            ZStack(alignment: .center) {
                                 AsyncImage(url: URL(string: book.imageUrl)) { phase in
                                     if let image = phase.image {
                                         image
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: isSmall ? 150 : 160, height: isSmall ? 150 : 240)
-                                            .cornerRadius(8)
+                                            .cornerRadius(4)
                                     } else {
                                         Rectangle()
                                             .fill(Color.gray.opacity(0.4))
                                             .frame(width: isSmall ? 150 : 160, height: isSmall ? 150 : 240)
-                                            .cornerRadius(8)
+                                            .cornerRadius(4)
                                     }
                                 }
+                                
+                                LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.4)]),
+                                               startPoint: .bottom,
+                                               endPoint: .top)
+                                .ignoresSafeArea()
+                                .cornerRadius(4)
                                 
                                 VStack {
                                     HStack {
@@ -47,13 +53,15 @@ struct BookRows: View {
                                                 .foregroundColor(book.isFavorite ? .red : .gray)
                                         }
                                     }
-                                    .padding(.horizontal, 10)
                                     .padding(.top, 10)
+                                    .padding(.horizontal, 10)
                                     
                                     Text(book.title)
-                                        .font(.headline)
-                                        .padding(.horizontal, 4)
+                                        .font(.title)
+                                        .lineLimit(2)
                                         .foregroundColor(Color.white)
+                                        .padding(.horizontal, 4)
+
                                     Spacer()
                                     Text(book.author)
                                         .font(.subheadline)
@@ -63,6 +71,7 @@ struct BookRows: View {
                                         .padding(.horizontal, 4)
                                 }
                             }
+                            .frame(width: isSmall ? 150 : 160, height: isSmall ? 150 : 240)
                             
                             if !isSmall {
                                 Text(book.title)
