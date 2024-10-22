@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyLibraryView: View {
     @State private var searchText = ""
-    @StateObject private var viewModel = BooksViewModel() // Initialize the view model
+    @EnvironmentObject var viewModel: BooksViewModel
     
     let columns = [
         GridItem(.flexible()),
@@ -43,9 +43,10 @@ struct MyLibraryView: View {
                 }
             }
             .onAppear {
-                viewModel.fetchBooks() // Fetch books when view appears
+                viewModel.fetchFavoritesBooks() 
             }
             .navigationTitle("My library")
         }
+        .onTapGestureToDismissKeyboard()
     }
 }

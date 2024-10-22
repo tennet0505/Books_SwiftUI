@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct Books_SwiftUIApp: App {
     let persistenceController = CoreDataManager.shared
+    @StateObject private var booksViewModel = BooksViewModel()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.persistentContainer.viewContext)
+                .environmentObject(booksViewModel)
         }
     }
 }

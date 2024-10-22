@@ -10,7 +10,7 @@ import SwiftUI
 struct BooksView: View {
     
     @State private var searchText = ""
-    @StateObject private var viewModel = BooksViewModel() 
+    @EnvironmentObject var viewModel: BooksViewModel
     @EnvironmentObject var tabViewModel: TabViewModel
     
     var body: some View {
@@ -47,13 +47,13 @@ struct BooksView: View {
                                 .font(.title)
                                 .padding([.top, .leading])
 
-                            BookRows(isSmall: false, books: viewModel.popularBooks)
+                            BookRows(isSmall: false)
                             
                             Text("New Books")
                                 .font(.title)
                                 .padding([.top, .leading])
 
-                            BookRows(isSmall: true, books: viewModel.newBooks)
+                            BookRows(isSmall: true)
                         }
                     }
                 }
@@ -63,5 +63,6 @@ struct BooksView: View {
             }
             .navigationTitle("Books")
         }
+        .onTapGestureToDismissKeyboard()
     }
 }

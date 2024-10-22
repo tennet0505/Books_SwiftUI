@@ -5,11 +5,6 @@
 //  Created by Oleg Ten on 22/10/2024.
 //
 
-
-import Combine
-import SwiftUI
-
-
 import Foundation
 import Combine
 
@@ -17,6 +12,7 @@ class BooksViewModel: ObservableObject {
     @Published var books: [Book] = []
     @Published var popularBooks: [Book] = []
     @Published var newBooks: [Book] = []
+    @Published var currentBook: Book?
     @Published var errorMessage: String? = nil
     @Published var isLoading: Bool = false
     private var cancellables = Set<AnyCancellable>()
@@ -108,13 +104,16 @@ class BooksViewModel: ObservableObject {
     
     // MARK: - Toggle Favorite Status for a Book
     func toggleFavoriteStatus(for book: Book) {
-        // Update favorite status in Core Data
-        CoreDataManager.shared.updateBook(book: book, isFavorite: book.isFavorite ?? false)
         
-        // Update favorite status in local books array
+        print(book)
+        // Update Core Data
+        CoreDataManager.shared.updateBook(book: book, isFavorite: book.isFavorite)
+        
+        // Update the local books array
         if let index = books.firstIndex(where: { $0.id == book.id }) {
-            books[index].isFavorite = book.isFavorite
+            books[index] = book
         }
+        self.currentBook = book
     }
     
     // MARK: - Fetch a Single Book by ID
@@ -124,5 +123,10 @@ class BooksViewModel: ObservableObject {
         } else {
             return nil
         }
+    }
+    
+    func fetchFavoritesBooks() {
+        let allBooks = CoreDataManager.shared.fetchFavoriteBooks().map{ $0.convertToBook() }
+        books = allBooks
     }
 }

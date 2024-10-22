@@ -13,7 +13,7 @@ struct Book: Identifiable, Decodable {
     var author: String
     var imageUrl: String
     var bookDescription: String
-    var isFavorite: Bool? = false
+    var isFavorite: Bool = false
     var isPopular: Bool = false
     var pdfUrl: String
 }

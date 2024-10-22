@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     @State private var searchText = ""
-    @StateObject private var viewModel = BooksViewModel() // Initialize the view model
+    @EnvironmentObject var viewModel: BooksViewModel
     
     let columns = [
         GridItem(.flexible())
@@ -48,5 +48,6 @@ struct SearchView: View {
             }
             .navigationTitle("Search")
         }
+        .onTapGestureToDismissKeyboard()
     }
 }

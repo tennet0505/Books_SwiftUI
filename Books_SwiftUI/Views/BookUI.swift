@@ -8,34 +8,85 @@
 import SwiftUI
 
 struct BookRows: View {
+    
+    @EnvironmentObject var viewModel: BooksViewModel
     let isSmall: Bool
-    let books: [Book]
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
-                ForEach(books) { book in
+                ForEach($viewModel.books) { $book in
                     NavigationLink(destination: BookDetailView(book: book)) {
                         VStack(alignment: .leading) {
-                            AsyncImage(url: URL(string: book.imageUrl)) { phase in
-                                if let image = phase.image {
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: isSmall ? 150 : 160, height: isSmall ? 150 : 240)
-                                        .cornerRadius(8)
-                                } else {
-                                    Rectangle()
-                                        .fill(Color.gray)
-                                        .frame(width: isSmall ? 150 : 160, height: isSmall ? 150 : 240)
-                                        .cornerRadius(8)
+                            ZStack {
+                                AsyncImage(url: URL(string: book.imageUrl)) { phase in
+                                    if let image = phase.image {
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: isSmall ? 150 : 160, height: isSmall ? 150 : 240)
+                                            .cornerRadius(8)
+                                    } else {
+                                        Rectangle()
+                                            .fill(Color.gray.opacity(0.4))
+                                            .frame(width: isSmall ? 150 : 160, height: isSmall ? 150 : 240)
+                                            .cornerRadius(8)
+                                    }
+                                }
+                                
+                                VStack {
+                                    HStack {
+                                        Spacer()
+                                        Button {
+                                            var updatedbBook = book
+                                            updatedbBook.isFavorite.toggle()
+                                            viewModel.toggleFavoriteStatus(for: updatedbBook)
+                                        } label: {
+                                            // Bind the button icon to the individual book's isFavorite status
+                                            Image(systemName: book.isFavorite ? "heart.fill" : "heart")
+                                                .foregroundColor(book.isFavorite ? .red : .gray)
+                                        }
+                                    }
+                                    .padding(.horizontal, 10)
+                                    .padding(.top, 10)
+                                    
+                                    Text(book.title)
+                                        .font(.headline)
+                                        .padding(.horizontal, 4)
+                                        .foregroundColor(Color.white)
+                                    Spacer()
+                                    Text(book.author)
+                                        .font(.subheadline)
+                                        .foregroundColor(Color.white)
+                                        .lineLimit(2)
+                                        .padding(.bottom, 8)
+                                        .padding(.horizontal, 4)
                                 }
                             }
-                            Text(book.title)
-                                .font(.headline)
-                            Text(book.author)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                            
+                            if !isSmall {
+                                Text(book.title)
+                                    .font(.headline)
+                                    .foregroundColor(Color.white)
+                                Text(book.author)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                HStack(spacing: 4) {
+                                    Image("Group 60")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 35, height: 18)
+                                    Image(systemName: "star.fill")
+                                        .foregroundColor(Color.orange)
+                                    Text("4.9")
+                                        .foregroundColor(Color.orange)
+                                        .font(.subheadline)
+                                    Spacer()
+                                    Text("1.234")
+                                        .font(.subheadline)
+                                        .foregroundColor(Color.gray)
+                                }
+                            }
                         }
                         .padding(.bottom, 10)
                     }
@@ -43,9 +94,22 @@ struct BookRows: View {
             }
             .padding(.horizontal)
         }
-        .frame(height: isSmall ? 210 : 300) // Adjust height as needed
+        .frame(height: isSmall ? 150 : 300)
     }
 }
+
+
+// Preview
+struct BookRows_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            BookRows(isSmall: false)
+                .previewLayout(.sizeThatFits)
+                .previewDisplayName("Large Books View")
+        }
+    }
+}
+
 
 
 struct BookGrid: View {
@@ -80,6 +144,7 @@ struct BookGrid: View {
                                 .font(.headline)
                                 .lineLimit(1) // Keep title to one line
                                 .minimumScaleFactor(0.5) // Allow text to shrink
+                                .foregroundColor(Color.white)
                             Text(book.author)
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
@@ -120,6 +185,7 @@ struct BookRow: View {
                                 .font(.headline)
                                 .lineLimit(2) // Keep title to one line
                                 .minimumScaleFactor(0.5) // Allow text to shrink
+                                .foregroundColor(Color.white)
                             Text(book.author)
                                 .font(.subheadline)
                                 .lineLimit(2)
