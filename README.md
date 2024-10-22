@@ -1,3 +1,4 @@
+Created this just for fun
 # Books_SwiftUI
 
 A simple iOS application built with SwiftUI that allows users to browse, search, and manage their favorite books. This app features a clean user interface and leverages the CoreData database for local storage of book information.
