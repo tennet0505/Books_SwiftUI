@@ -15,7 +15,7 @@ struct BookRows: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
-                ForEach(!isSmall ? $viewModel.popularBooks : $viewModel.newBooks) { $book in
+                ForEach($viewModel.books) { $book in
                     NavigationLink(destination: BookDetailView(book: book)) {
                         VStack(alignment: .leading) {
                             ZStack(alignment: .center) {
@@ -44,9 +44,9 @@ struct BookRows: View {
                                     HStack {
                                         Spacer()
                                         Button {
-                                            var updatedbBook = book
-                                            updatedbBook.isFavorite.toggle()
-                                            viewModel.toggleFavoriteStatus(for: updatedbBook)
+                                            var updatedBook = book
+                                            updatedBook.isFavorite.toggle()
+                                            viewModel.toggleFavoriteStatus(for: updatedBook)
                                         } label: {
                                             // Bind the button icon to the individual book's isFavorite status
                                             Image(systemName: book.isFavorite ? "heart.fill" : "heart")
