@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "41CEC6FB-11C3-4C81-849E-E803C6DCC88A"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "485E3397-C105-4F1A-8E68-346F5EA98549"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Books_SwiftUI/Network/APIService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "fetchBooksFromDB()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "485E3397-C105-4F1A-8E68-346F5EA98549 - df3a77ff3e451d11"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Books_SwiftUI.APIService.fetchBooksFromDB() -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;Books_SwiftUI.Book&gt;, Books_SwiftUI.APIError&gt;"
+                  moduleName = "Books_SwiftUI.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olegten/Appical/Books_SwiftUI/Books_SwiftUI/Network/APIService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52">
+               </Location>
+               <Location
+                  uuid = "485E3397-C105-4F1A-8E68-346F5EA98549 - 1109f631473b83db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((Swift.Result&lt;Swift.Array&lt;Books_SwiftUI.Book&gt;, Swift.Never&gt;) -&gt; ()) -&gt; () in Books_SwiftUI.APIService.fetchBooksFromDB() -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;Books_SwiftUI.Book&gt;, Books_SwiftUI.APIError&gt;"
+                  moduleName = "Books_SwiftUI.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olegten/Appical/Books_SwiftUI/Books_SwiftUI/Network/APIService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52">
+               </Location>
+               <Location
+                  uuid = "485E3397-C105-4F1A-8E68-346F5EA98549 - 1109f631473b83db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((Swift.Result&lt;Swift.Array&lt;Books_SwiftUI.Book&gt;, Swift.Never&gt;) -&gt; ()) -&gt; () in Books_SwiftUI.APIService.fetchBooksFromDB() -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;Books_SwiftUI.Book&gt;, Books_SwiftUI.APIError&gt;"
+                  moduleName = "Books_SwiftUI.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olegten/Appical/Books_SwiftUI/Books_SwiftUI/Network/APIService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

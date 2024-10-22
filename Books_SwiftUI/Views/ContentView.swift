@@ -9,45 +9,38 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @StateObject private var viewModel = BooksViewModel() // Initialize the view model
+    @StateObject private var tabViewModel = TabViewModel()
+    var body: some View {
+        TabView(selection: $tabViewModel.selectedTab) {
+            BooksView()
+                .tabItem {
+                    Image(systemName: "book")
+                    Text("Home")
+                }
+                .tag(0)
+            
+            MyLibraryView()
+                .tabItem {
+                    Image(systemName: "books.vertical")
+                    Text("Favorites")
+                }
+                .tag(1)
+            
+            SearchView()
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                    Text("Settings")
+                }
+                .tag(2)
+        }
+        .environmentObject(tabViewModel)
+    }
+}
 
-       var body: some View {
-           NavigationView {
-               VStack(spacing: 16) {
-                   if viewModel.isLoading {
-                       ProgressView("Loading books...")
-                   } else if let errorMessage = viewModel.errorMessage {
-                       Text(errorMessage)
-                           .foregroundColor(.red)
-                   } else {
-                       ScrollView {
-                           VStack(alignment: .leading) {
 
-                               GenreScrollView(genres: viewModel.fetchBookGenres())
-                                   .frame(height: 100)
-
-                               Text("Popular Books")
-                                   .font(.title)
-                                   .padding([.top, .leading])
-
-                               BookGrid(isSmall: false, books: viewModel.popularBooks)
-                               
-                               Text("New Books")
-                                   .font(.title)
-                                   .padding([.top, .leading])
-
-                               BookGrid(isSmall: true, books: viewModel.newBooks)
-                           }
-                       }
-                   }
-               }
-               .onAppear {
-                   viewModel.fetchBooks() // Fetch books when view appears
-               }
-               .navigationTitle("Books")
-           }
-       }
-   }
+#Preview {
+    BooksView()
+}
 
 struct GenreScrollView: View {
     let genres: [Genre]
