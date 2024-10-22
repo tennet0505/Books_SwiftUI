@@ -15,7 +15,7 @@ struct BookRows: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
-                ForEach($viewModel.books) { $book in
+                ForEach(!isSmall ? $viewModel.popularBooks : $viewModel.newBooks) { $book in
                     NavigationLink(destination: BookDetailView(book: book)) {
                         VStack(alignment: .leading) {
                             ZStack(alignment: .center) {
