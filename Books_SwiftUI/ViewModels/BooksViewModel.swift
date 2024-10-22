@@ -112,6 +112,7 @@ class BooksViewModel: ObservableObject {
         // Update the local books array
         if let index = books.firstIndex(where: { $0.id == book.id }) {
             books[index] = book
+            filterAllBooks()
         }
         self.currentBook = book
     }
