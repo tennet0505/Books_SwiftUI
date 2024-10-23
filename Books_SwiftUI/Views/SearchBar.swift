@@ -65,7 +65,7 @@ struct SearchBar: UIViewControllerRepresentable {
         let searchBar = UISearchBar()
         searchBar.delegate = context.coordinator
         searchBar.showsCancelButton = true
-        searchBar.placeholder = "Search book/author"
+        searchBar.placeholder = "Books & Authors"
         searchBar.searchBarStyle = .minimal
         let viewController = UIViewController()
         viewController.view = searchBar

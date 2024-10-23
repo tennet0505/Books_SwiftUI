@@ -38,11 +38,12 @@ struct BooksView: View {
                     .padding(.bottom, 16)
                     
                     if viewModel.books.isEmpty {
-                        ContentUnavailableView("Service is not available. Please try again later.", systemImage:  "antenna.radiowaves.left.and.right.slash")
+                        ProgressView("Loading...")
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .padding()
                     } else {
                         
                         VStack(alignment: .leading) {
-                            
                             GenreScrollView(genres: viewModel.fetchBookGenres())
                                 .frame(height: 100)
                             
