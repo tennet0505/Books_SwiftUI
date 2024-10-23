@@ -28,25 +28,23 @@ struct MyLibraryView: View {
     }
     
     var body: some View {
-        NavigationView {
-            VStack(spacing: 32) {
-                if viewModel.isLoading {
-                    ProgressView("Loading books...")
-                } else if let errorMessage = viewModel.errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                } else {
-                    VStack(spacing: 16) {
-                        SearchBar(searchText: $searchText)
-                        BookGrid(books: filteredBooks)
-                    }
+        VStack(spacing: 32) {
+            if viewModel.isLoading {
+                ProgressView("Loading books...")
+            } else if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+            } else {
+                VStack(spacing: 16) {
+                    SearchBar(searchText: $searchText)
+                    BookGrid(books: filteredBooks)
                 }
             }
-            .onAppear {
-                viewModel.fetchFavoritesBooks() 
-            }
-            .navigationTitle("My library")
         }
+        .onAppear {
+            viewModel.fetchFavoritesBooks() 
+        }
+        .navigationTitle("My library")
         .onTapGestureToDismissKeyboard()
     }
 }

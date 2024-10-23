@@ -12,39 +12,42 @@ struct ContentView: View {
     @StateObject private var tabViewModel = TabViewModel()
     var body: some View {
         TabView(selection: $tabViewModel.selectedTab) {
-            BooksView()
-                .tabItem {
-                    Image(systemName: "book")
-                    Text("Home")
-                }
-                .tag(0)
-            
-            MyLibraryView()
-                .tabItem {
-                    Image(systemName: "books.vertical")
-                    Text("Favorites")
-                }
-                .tag(1)
-            
-            SearchView()
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Settings")
-                }
-                .tag(2)
+            NavigationView {
+                BooksView()
+            }
+            .tint(.white)
+            .tabItem {
+                Image(systemName: "book")
+                Text("Home")
+            }
+            .tag(0)
+            NavigationView {
+                MyLibraryView()
+            }
+            .tint(.white)
+            .tabItem {
+                Image(systemName: "books.vertical")
+                Text("Favorites")
+            }
+            .tag(1)
+            NavigationView {
+                SearchView()
+            }
+            .tint(.white)
+            .tabItem {
+                Image(systemName: "magnifyingglass")
+                Text("Settings")
+            }
+            .tag(2)
         }
+        .accentColor(.white)
         .environmentObject(tabViewModel)
     }
 }
 
-
-#Preview {
-    BooksView()
-}
-
 struct GenreScrollView: View {
     let genres: [Genre]
-
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {

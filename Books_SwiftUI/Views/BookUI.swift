@@ -103,23 +103,10 @@ struct BookRows: View {
             }
             .padding(.horizontal)
         }
+        .navigationBarTitle("")
         .frame(height: isSmall ? 150 : 300)
     }
 }
-
-
-// Preview
-struct BookRows_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            BookRows(isSmall: false)
-                .previewLayout(.sizeThatFits)
-                .previewDisplayName("Large Books View")
-        }
-    }
-}
-
-
 
 struct BookGrid: View {
     let books: [Book]
@@ -162,6 +149,7 @@ struct BookGrid: View {
                     }
                 }
             }
+            .navigationBarTitle("")
             .padding(.horizontal)
         }
     }
@@ -199,6 +187,22 @@ struct BookRow: View {
                                 .font(.subheadline)
                                 .lineLimit(2)
                                 .foregroundColor(.secondary)
+                            HStack(spacing: 4) {
+                                Image("Group 60")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 30, height: 15)
+                                Image(systemName: "star.fill")
+                                    .foregroundColor(Color.orange)
+                                Text("4.9")
+                                    .foregroundColor(Color.orange)
+                                    .font(.subheadline)
+                                Spacer()
+                                Text("1.234")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color.gray)
+                            }
+
                         }
                     }
                     .padding(.bottom, 10)
@@ -206,5 +210,6 @@ struct BookRow: View {
             }
             .padding(.horizontal)
         }
+        .navigationBarTitle("")
     }
 }

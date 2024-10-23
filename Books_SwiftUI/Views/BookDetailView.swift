@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BookDetailView: View {
-    
+    @Environment(\.presentationMode) var presentationMode
     let book: Book
     @StateObject private var viewModel = BooksViewModel()
     @State private var isSharePresented: Bool = false
@@ -33,6 +33,7 @@ struct BookDetailView: View {
                     isSharePresented = true
                 } label: {
                     Image(systemName: "square.and.arrow.up")
+                        .foregroundColor(.gray)
                 }
                 .sheet(isPresented: $isSharePresented) {
                     ShareSheet(items: [viewModel.currentBook?.title ?? "", URL(string: viewModel.currentBook?.imageUrl ?? "") ?? ""])
