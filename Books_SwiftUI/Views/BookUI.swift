@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct BookRows: View {
     
@@ -19,21 +20,22 @@ struct BookRows: View {
                     NavigationLink(destination: BookDetailView(book: book)) {
                         VStack(alignment: .leading) {
                             ZStack(alignment: .center) {
-                                AsyncImage(url: URL(string: book.imageUrl)) { phase in
-                                    if let image = phase.image {
-                                        image
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: isSmall ? 150 : 160, height: isSmall ? 150 : 240)
-                                            .cornerRadius(4)
-                                    } else {
-                                        Rectangle()
-                                            .fill(Color.gray.opacity(0.4))
-                                            .frame(width: isSmall ? 150 : 160, height: isSmall ? 150 : 240)
-                                            .cornerRadius(4)
+                                KFImage(URL(string: book.imageUrl))
+                                    .resizable()
+                                    .serialize(as: .PNG)
+                                    .onSuccess { result in
+                                        print("Image loaded from cache: \(result.cacheType)")
                                     }
-                                }
-                                
+                                    .onFailure { error in
+                                        print("Error: \(error)")
+                                    }.placeholder { p in
+                                        ProgressView(p)
+                                    }
+                                    .scaledToFill()
+                                    .frame(width: isSmall ? 150 : 160, height: isSmall ? 150 : 240)
+                                    .clipped()
+                                    .cornerRadius(4)
+                    
                                 LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.4)]),
                                                startPoint: .bottom,
                                                endPoint: .top)
@@ -122,20 +124,22 @@ struct BookGrid: View {
                 ForEach(books) { book in
                     NavigationLink(destination: BookDetailView(book: book)) {
                         VStack(alignment: .leading) {
-                            AsyncImage(url: URL(string: book.imageUrl)) { phase in
-                                if let image = phase.image {
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: (UIScreen.main.bounds.width - 48) / 2, height: 240)
-                                        .cornerRadius(8)
-                                } else {
-                                    Rectangle()
-                                        .fill(Color.gray)
-                                        .frame(width: (UIScreen.main.bounds.width - 48) / 2, height: 240)
-                                        .cornerRadius(8)
+                            KFImage(URL(string: book.imageUrl))
+                                .resizable()
+                                .serialize(as: .PNG)
+                                .onSuccess { result in
+                                    print("Image loaded from cache: \(result.cacheType)")
                                 }
-                            }
+                                .onFailure { error in
+                                    print("Error: \(error)")
+                                }.placeholder { p in
+                                    ProgressView(p)
+                                }
+                                .scaledToFill()
+                                .frame(width: (UIScreen.main.bounds.width - 48) / 2, height: 240)
+                                .clipped()
+                                .cornerRadius(4)
+                                
                             Text(book.title)
                                 .font(.headline)
                                 .lineLimit(1) // Keep title to one line
@@ -163,20 +167,23 @@ struct BookRow: View {
             ForEach(books) { book in
                 NavigationLink(destination: BookDetailView(book: book)) {
                     HStack(spacing: 8) {
-                        AsyncImage(url: URL(string: book.imageUrl)) { phase in
-                            if let image = phase.image {
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 50, height: 75)
-                                    .cornerRadius(2)
-                            } else {
-                                Rectangle()
-                                    .fill(Color.gray)
-                                    .frame(width: 50, height: 75)
-                                    .cornerRadius(2)
+                        KFImage(URL(string: book.imageUrl))
+                            .resizable()
+                            .serialize(as: .PNG)
+                            .onSuccess { result in
+                                print("Image loaded from cache: \(result.cacheType)")
                             }
-                        }
+                            .onFailure { error in
+                                print("Error: \(error)")
+                            }
+                            .placeholder { p in
+                                ProgressView(p)
+                            }
+                            .scaledToFill()
+                            .frame(width: 50, height: 75)
+                            .clipped()
+                            .cornerRadius(4)
+                        
                         VStack(alignment: .leading) {
                             Text(book.title)
                                 .font(.headline)

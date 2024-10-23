@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct BookDetailView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -19,21 +20,24 @@ struct BookDetailView: View {
             VStack {
                 GeometryReader { geometry in
                     let scale = calculateScale(from: geometry)
-                    
-                    AsyncImage(url: URL(string: viewModel.currentBook?.imageUrl ?? "")) { phase in
-                        if let image = phase.image {
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(height: 300) .clipped()
-                                .scaleEffect(scale)
-                                .offset(y: calculateOffset(from: geometry))
-                        } else {
-                            Rectangle()
-                                .fill(Color.gray)
-                                .frame(height: 300)
+                    KFImage(URL(string: book.imageUrl))
+                        .resizable()
+                        .serialize(as: .PNG)
+                        .onSuccess { result in
+                            print("Image loaded from cache: \(result.cacheType)")
                         }
-                    }
+                        .onFailure { error in
+                            print("Error: \(error)")
+                        }
+                        .placeholder { p in
+                            ProgressView(p)
+                        }
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 300)
+                        .clipped()
+                        .scaleEffect(scale)
+                        .offset(y: calculateOffset(from: geometry))
+                    
                 }.frame(height: 300)
                 
                 HStack(spacing: 16) {
