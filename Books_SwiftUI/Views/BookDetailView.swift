@@ -20,25 +20,31 @@ struct BookDetailView: View {
             VStack {
                 GeometryReader { geometry in
                     let scale = calculateScale(from: geometry)
-                    KFImage(URL(string: book.imageUrl))
-                        .resizable()
-                        .serialize(as: .PNG)
-                        .onSuccess { result in
-                            print("Image loaded from cache: \(result.cacheType)")
-                        }
-                        .onFailure { error in
-                            print("Error: \(error)")
-                        }
-                        .placeholder { p in
-                            ProgressView(p)
-                        }
-                        .aspectRatio(contentMode: .fill)
-                        .frame(height: 300)
-                        .clipped()
-                        .scaleEffect(scale)
-                        .offset(y: calculateOffset(from: geometry))
-                    
-                }.frame(height: 300)
+                    ZStack(alignment: .center) {
+                        KFImage(URL(string: book.imageUrl))
+                            .resizable()
+                            .serialize(as: .PNG)
+                            .onSuccess { result in
+                                print("Image loaded from cache: \(result.cacheType)")
+                            }
+                            .onFailure { error in
+                                print("Error: \(error)")
+                            }
+                            .placeholder { p in
+                                ProgressView(p)
+                            }
+                        LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.4)]),
+                                       startPoint: .bottom,
+                                       endPoint: .top)
+                        .ignoresSafeArea()
+                    }
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: UIScreen.main.bounds.width)
+                    .clipped()
+                    .scaleEffect(scale)
+                    .offset(y: calculateOffset(from: geometry))
+                }
+                .frame(height: UIScreen.main.bounds.width)
                 
                 HStack(spacing: 16) {
                     Button {

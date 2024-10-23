@@ -14,8 +14,11 @@ struct ContentView: View {
         TabView(selection: $tabViewModel.selectedTab) {
             NavigationView {
                 BooksView()
+                    
             }
             .tint(.white)
+            .navigationTitle("Books")
+            
             .tabItem {
                 Image(systemName: "book")
                 Text("Home")
@@ -25,6 +28,8 @@ struct ContentView: View {
                 MyLibraryView()
             }
             .tint(.white)
+            .navigationTitle("My library")
+            
             .tabItem {
                 Image(systemName: "books.vertical")
                 Text("Favorites")
@@ -34,6 +39,8 @@ struct ContentView: View {
                 SearchView()
             }
             .tint(.white)
+            .navigationTitle("Search")
+            
             .tabItem {
                 Image(systemName: "magnifyingglass")
                 Text("Settings")

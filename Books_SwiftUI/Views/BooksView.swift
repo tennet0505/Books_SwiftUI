@@ -57,10 +57,10 @@ struct BooksView: View {
                 }
             }
         }
+        .navigationTitle("Books")
         .onAppear {
             viewModel.fetchBooks() // Fetch books when view appears
         }
-        .navigationTitle("Books")
         .onTapGestureToDismissKeyboard()
     }
 }

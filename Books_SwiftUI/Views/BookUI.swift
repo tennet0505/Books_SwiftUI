@@ -100,12 +100,11 @@ struct BookRows: View {
                             }
                         }
                         .padding(.bottom, 10)
-                    }
+                    }.navigationTitle("Books")
                 }
             }
             .padding(.horizontal)
         }
-        .navigationBarTitle("")
         .frame(height: isSmall ? 150 : 300)
     }
 }
@@ -124,36 +123,51 @@ struct BookGrid: View {
                 ForEach(books) { book in
                     NavigationLink(destination: BookDetailView(book: book)) {
                         VStack(alignment: .leading) {
-                            KFImage(URL(string: book.imageUrl))
-                                .resizable()
-                                .serialize(as: .PNG)
-                                .onSuccess { result in
-                                    print("Image loaded from cache: \(result.cacheType)")
-                                }
-                                .onFailure { error in
-                                    print("Error: \(error)")
-                                }.placeholder { p in
-                                    ProgressView(p)
-                                }
-                                .scaledToFill()
-                                .frame(width: (UIScreen.main.bounds.width - 48) / 2, height: 240)
-                                .clipped()
+                            ZStack(alignment: .center) {
+                                KFImage(URL(string: book.imageUrl))
+                                    .resizable()
+                                    .serialize(as: .PNG)
+                                    .onSuccess { result in
+                                        print("Image loaded from cache: \(result.cacheType)")
+                                    }
+                                    .onFailure { error in
+                                        print("Error: \(error)")
+                                    }.placeholder { p in
+                                        ProgressView(p)
+                                    }
+                                    .scaledToFill()
+                                    .frame(width: 160, height: 240)
+                                    .clipped()
+                                    .cornerRadius(4)
+                    
+                                LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.4)]),
+                                               startPoint: .bottom,
+                                               endPoint: .top)
+                                .ignoresSafeArea()
                                 .cornerRadius(4)
                                 
-                            Text(book.title)
-                                .font(.headline)
-                                .lineLimit(1) // Keep title to one line
-                                .minimumScaleFactor(0.5) // Allow text to shrink
-                                .foregroundColor(Color.white)
-                            Text(book.author)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                                VStack {
+                                    Text(book.title)
+                                        .font(.title)
+                                        .lineLimit(2)
+                                        .foregroundColor(Color.white)
+                                        .padding(.horizontal, 4)
+                                        .padding(.top, 24)
+                                    Spacer()
+                                    Text(book.author)
+                                        .font(.subheadline)
+                                        .foregroundColor(Color.white)
+                                        .lineLimit(2)
+                                        .padding(.bottom, 8)
+                                        .padding(.horizontal, 4)
+                                }
+                            }
+                            .frame(width: 160, height: 240)
                         }
                         .padding(.bottom, 10)
                     }
                 }
             }
-            .navigationBarTitle("")
             .padding(.horizontal)
         }
     }
@@ -163,60 +177,61 @@ struct BookRow: View {
     let books: [Book]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            ForEach(books) { book in
-                NavigationLink(destination: BookDetailView(book: book)) {
-                    HStack(spacing: 8) {
-                        KFImage(URL(string: book.imageUrl))
-                            .resizable()
-                            .serialize(as: .PNG)
-                            .onSuccess { result in
-                                print("Image loaded from cache: \(result.cacheType)")
-                            }
-                            .onFailure { error in
-                                print("Error: \(error)")
-                            }
-                            .placeholder { p in
-                                ProgressView(p)
-                            }
-                            .scaledToFill()
-                            .frame(width: 50, height: 75)
-                            .clipped()
-                            .cornerRadius(4)
-                        
-                        VStack(alignment: .leading) {
-                            Text(book.title)
-                                .font(.headline)
-                                .lineLimit(2) // Keep title to one line
-                                .minimumScaleFactor(0.5) // Allow text to shrink
-                                .foregroundColor(Color.white)
-                            Text(book.author)
-                                .font(.subheadline)
-                                .lineLimit(2)
-                                .foregroundColor(.secondary)
-                            HStack(spacing: 4) {
-                                Image("Group 60")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 30, height: 15)
-                                Image(systemName: "star.fill")
-                                    .foregroundColor(Color.orange)
-                                Text("4.9")
-                                    .foregroundColor(Color.orange)
+        ScrollView(showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 16) {
+                ForEach(books) { book in
+                    NavigationLink(destination: BookDetailView(book: book)) {
+                        HStack(spacing: 8) {
+                            KFImage(URL(string: book.imageUrl))
+                                .resizable()
+                                .serialize(as: .PNG)
+                                .onSuccess { result in
+                                    print("Image loaded from cache: \(result.cacheType)")
+                                }
+                                .onFailure { error in
+                                    print("Error: \(error)")
+                                }
+                                .placeholder { p in
+                                    ProgressView(p)
+                                }
+                                .scaledToFill()
+                                .frame(width: 50, height: 75)
+                                .clipped()
+                                .cornerRadius(4)
+                            
+                            VStack(alignment: .leading) {
+                                Text(book.title)
+                                    .font(.headline)
+                                    .lineLimit(2)
+                                    .minimumScaleFactor(0.5)
+                                    .foregroundColor(Color.white)
+                                Text(book.author)
                                     .font(.subheadline)
-                                Spacer()
-                                Text("1.234")
-                                    .font(.subheadline)
-                                    .foregroundColor(Color.gray)
+                                    .lineLimit(2)
+                                    .foregroundColor(.secondary)
+                                HStack(spacing: 4) {
+                                    Image("Group 60")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 30, height: 15)
+                                    Image(systemName: "star.fill")
+                                        .foregroundColor(Color.orange)
+                                    Text("4.9")
+                                        .foregroundColor(Color.orange)
+                                        .font(.subheadline)
+                                    Spacer()
+                                    Text("1.234")
+                                        .font(.subheadline)
+                                        .foregroundColor(Color.gray)
+                                }
+                                
                             }
-
                         }
+                        .padding(.bottom, 10)
                     }
-                    .padding(.bottom, 10)
                 }
             }
             .padding(.horizontal)
         }
-        .navigationBarTitle("")
     }
 }
