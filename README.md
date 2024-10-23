@@ -19,7 +19,6 @@ A simple iOS application built with SwiftUI that allows users to browse, search,
    - [Libraries/Frameworks Used](#librariesframeworks-used)
 4. [Running the Project](#4-running-the-project)
    - [Clone the Repository](#clone-the-repository)
-   - [Install CocoaPods](#install-cocoapods)
    - [Open the Project in Xcode](#open-the-project-in-xcode)
    - [Build & Run](#build--run)
 5. [Future Improvements](#6-future-improvements)
@@ -70,7 +69,7 @@ The project follows the **MVVM (Model-View-ViewModel)** architecture pattern, pr
 - **Xcode**: Version 14.0 or later
 - **Swift**: Version 5.3 or later
 - **iOS Deployment Target**: iOS 14.0 or later
-- **CocoaPods**: For managing third-party libraries
+- **SPM**: For managing third-party libraries
 
 ### Libraries/Frameworks Used
 - **Combine**: For managing reactive state and data flow.
