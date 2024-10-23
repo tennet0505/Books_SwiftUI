@@ -38,7 +38,11 @@ struct SearchView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     SearchBar(text: $searchText, isSearching: $isSearching)
                         .frame(height: 44)
-                    BookRow(books: filteredBooks)
+                    if filteredBooks.isEmpty {
+                        ContentUnavailableView.search
+                    } else {
+                        BookRow(books: filteredBooks)
+                    }
                 }
             }
         }

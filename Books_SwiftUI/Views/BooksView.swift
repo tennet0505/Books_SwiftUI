@@ -37,22 +37,27 @@ struct BooksView: View {
                     }
                     .padding(.bottom, 16)
                     
-                    VStack(alignment: .leading) {
+                    if viewModel.books.isEmpty {
+                        ContentUnavailableView("Service is not available. Please try again later.", systemImage:  "antenna.radiowaves.left.and.right.slash")
+                    } else {
                         
-                        GenreScrollView(genres: viewModel.fetchBookGenres())
-                            .frame(height: 100)
-                        
-                        Text("Popular Books")
-                            .font(.title)
-                            .padding([.top, .leading])
-                        
-                        BookRows(isSmall: false)
-                        
-                        Text("New Books")
-                            .font(.title)
-                            .padding([.top, .leading])
-                        
-                        BookRows(isSmall: true)
+                        VStack(alignment: .leading) {
+                            
+                            GenreScrollView(genres: viewModel.fetchBookGenres())
+                                .frame(height: 100)
+                            
+                            Text("Popular Books")
+                                .font(.title)
+                                .padding([.top, .leading])
+                            
+                            BookRows(isSmall: false)
+                            
+                            Text("New Books")
+                                .font(.title)
+                                .padding([.top, .leading])
+                            
+                            BookRows(isSmall: true)
+                        }
                     }
                 }
             }

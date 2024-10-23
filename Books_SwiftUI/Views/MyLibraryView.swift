@@ -39,7 +39,11 @@ struct MyLibraryView: View {
                 VStack(spacing: 16) {
                     SearchBar(text: $searchText, isSearching: $isSearching)
                         .frame(height: 44)
-                    BookGrid(books: filteredBooks)
+                    if filteredBooks.isEmpty {
+                        ContentUnavailableView.search
+                    } else {
+                        BookGrid(books: filteredBooks)
+                    }
                 }
             }
         }
