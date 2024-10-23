@@ -34,7 +34,7 @@ struct SearchView: View {
                 Text(errorMessage)
                     .foregroundColor(.red)
             } else {
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 16) {
                         SearchBar(searchText: $searchText)
                         BookRow(books: filteredBooks)

@@ -119,7 +119,7 @@ struct BookGrid: View {
     }
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVGrid(columns: columns, spacing: 8) { // Use LazyVGrid for grid layout
                 ForEach(books) { book in
                     NavigationLink(destination: BookDetailView(book: book)) {

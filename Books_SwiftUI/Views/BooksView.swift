@@ -21,7 +21,7 @@ struct BooksView: View {
                 Text(errorMessage)
                     .foregroundColor(.red)
             } else {
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     ZStack {
                         SearchBar(searchText: $searchText)
                             .disabled(true)
