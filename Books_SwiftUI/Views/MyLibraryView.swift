@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MyLibraryView: View {
     @State private var searchText = ""
+    @State private var isSearching = false
     @EnvironmentObject var viewModel: BooksViewModel
     
     let columns = [
@@ -36,7 +37,8 @@ struct MyLibraryView: View {
                     .foregroundColor(.red)
             } else {
                 VStack(spacing: 16) {
-                    SearchBar(searchText: $searchText)
+                    SearchBar(text: $searchText, isSearching: $isSearching)
+                        .frame(height: 44)
                     BookGrid(books: filteredBooks)
                 }
             }

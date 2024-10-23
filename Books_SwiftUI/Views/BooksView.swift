@@ -23,7 +23,7 @@ struct BooksView: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     ZStack {
-                        SearchBar(searchText: $searchText)
+                        SearchBarSimple(searchText: $searchText)
                             .disabled(true)
                         Button(action: {
                             tabViewModel.selectedTab = 2
