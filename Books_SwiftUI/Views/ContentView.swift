@@ -47,7 +47,7 @@ struct ContentView: View {
             }
             .tag(2)
         }
-        .accentColor(.white)
+        .accentColor(.primary)
         .environmentObject(tabViewModel)
     }
 }

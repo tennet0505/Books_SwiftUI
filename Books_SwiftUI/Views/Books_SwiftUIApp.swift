@@ -15,6 +15,7 @@ struct Books_SwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .background(Color.primary.ignoresSafeArea())
                 .environment(\.managedObjectContext, persistenceController.persistentContainer.viewContext)
                 .environmentObject(booksViewModel)
         }

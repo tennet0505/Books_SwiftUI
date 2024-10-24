@@ -62,6 +62,7 @@ struct BookDetailView: View {
                         Text(book.title)
                             .font(.largeTitle)
                             .padding(.top)
+                            .multilineTextAlignment(.center)
                         
                         Text(book.author)
                             .font(.title2)
