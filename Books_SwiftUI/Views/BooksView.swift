@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BooksView: View {
     
+//    @Namespace private var animation
     @State private var searchText = ""
     @EnvironmentObject var viewModel: BooksViewModel
     @EnvironmentObject var tabViewModel: TabViewModel
@@ -23,7 +24,11 @@ struct BooksView: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     ZStack {
-                        SearchBarSimple(searchText: $searchText)
+                        TextField("Books & Authors", text: $searchText)
+                            .padding(10)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(8)
+                            .padding(.horizontal)
                             .disabled(true)
                         Button(action: {
                             tabViewModel.selectedTab = 2
