@@ -12,7 +12,7 @@ struct ContentView: View {
     @StateObject private var tabViewModel = TabViewModel()
     var body: some View {
         TabView(selection: $tabViewModel.selectedTab) {
-            NavigationView {
+            NavigationStack {
                 BooksView()
                     
             }
@@ -24,7 +24,7 @@ struct ContentView: View {
                 Text("Home")
             }
             .tag(0)
-            NavigationView {
+            NavigationStack {
                 MyLibraryView()
             }
             .tint(.white)
@@ -35,7 +35,7 @@ struct ContentView: View {
                 Text("Favorites")
             }
             .tag(1)
-            NavigationView {
+            NavigationStack {
                 SearchView()
             }
             .tint(.white)

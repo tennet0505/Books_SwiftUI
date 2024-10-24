@@ -10,6 +10,7 @@ import Kingfisher
 
 struct BookRows: View {
     
+    @Namespace private var animation //Animation for cells!!!
     @EnvironmentObject var viewModel: BooksViewModel
     let isSmall: Bool
     
@@ -17,7 +18,10 @@ struct BookRows: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
                 ForEach(!isSmall ? $viewModel.popularBooks : $viewModel.newBooks) { $book in
-                    NavigationLink(destination: BookDetailView(book: book)) {
+                    NavigationLink(destination:
+                                    BookDetailView(book: book)
+                        .navigationTransition(.zoom(sourceID: book.id, in: animation))) {  //Animation for cells!!!
+                            
                         VStack(alignment: .leading) {
                             ZStack(alignment: .center) {
                                 KFImage(URL(string: book.imageUrl))
@@ -100,7 +104,10 @@ struct BookRows: View {
                             }
                         }
                         .padding(.bottom, 10)
-                    }.navigationTitle("Books")
+                        .matchedTransitionSource(id: book.id, in: animation) { configuration in
+                            configuration.background(.clear) //Animation for cells!!!
+                        }
+                    }
                 }
             }
             .padding(.horizontal)
@@ -110,6 +117,8 @@ struct BookRows: View {
 }
 
 struct BookGrid: View {
+    
+    @Namespace private var animation 
     let books: [Book]
     
     // Define two columns
@@ -121,7 +130,11 @@ struct BookGrid: View {
         ScrollView(showsIndicators: false) {
             LazyVGrid(columns: columns, spacing: 8) { // Use LazyVGrid for grid layout
                 ForEach(books) { book in
-                    NavigationLink(destination: BookDetailView(book: book)) {
+                    NavigationLink(destination:
+                                    BookDetailView(book: book)
+                        .navigationTransition(.zoom(sourceID: book.id, in: animation))
+                                   
+                    ) {
                         VStack(alignment: .leading) {
                             ZStack(alignment: .center) {
                                 KFImage(URL(string: book.imageUrl))
@@ -165,6 +178,9 @@ struct BookGrid: View {
                             .frame(width: 160, height: 240)
                         }
                         .padding(.bottom, 10)
+                        .matchedTransitionSource(id: book.id, in: animation) { configuration in
+                            configuration.background(.clear)
+                        }
                     }
                 }
             }
@@ -174,13 +190,18 @@ struct BookGrid: View {
 }
 
 struct BookRow: View {
+    
+    @Namespace private var animation
     let books: [Book]
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 16) {
                 ForEach(books) { book in
-                    NavigationLink(destination: BookDetailView(book: book)) {
+                    NavigationLink(destination:
+                                    BookDetailView(book: book)
+                        .navigationTransition(.zoom(sourceID: book.id, in: animation))
+                    ) {
                         HStack(spacing: 8) {
                             KFImage(URL(string: book.imageUrl))
                                 .resizable()
@@ -228,6 +249,9 @@ struct BookRow: View {
                             }
                         }
                         .padding(.bottom, 10)
+                        .matchedTransitionSource(id: book.id, in: animation) { configuration in
+                            configuration.background(.clear)
+                        }
                     }
                 }
             }

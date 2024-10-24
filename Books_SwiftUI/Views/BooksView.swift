@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BooksView: View {
     
-//    @Namespace private var animation
     @State private var searchText = ""
     @EnvironmentObject var viewModel: BooksViewModel
     @EnvironmentObject var tabViewModel: TabViewModel
