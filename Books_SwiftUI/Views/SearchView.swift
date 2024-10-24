@@ -36,14 +36,13 @@ struct SearchView: View {
                     .foregroundColor(.red)
             } else {
                 VStack(alignment: .leading, spacing: 16) {
-                    SearchBar(text: $searchText, isSearching: $isSearching)
-                        .frame(height: 44)
                     if filteredBooks.isEmpty {
                         ContentUnavailableView.search
                     } else {
                         BookRow(books: filteredBooks)
                     }
                 }
+                .searchable(text: $searchText)
             }
         }
         .onAppear {

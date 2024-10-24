@@ -37,14 +37,13 @@ struct MyLibraryView: View {
                     .foregroundColor(.red)
             } else {
                 VStack(spacing: 16) {
-                    SearchBar(text: $searchText, isSearching: $isSearching)
-                        .frame(height: 44)
                     if filteredBooks.isEmpty {
                         ContentUnavailableView.search
                     } else {
                         BookGrid(books: filteredBooks)
                     }
                 }
+                .searchable(text: $searchText)
             }
         }
         .onAppear {

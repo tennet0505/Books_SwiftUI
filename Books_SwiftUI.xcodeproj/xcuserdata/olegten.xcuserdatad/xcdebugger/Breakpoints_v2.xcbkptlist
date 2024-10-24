@@ -3,4 +3,22 @@
    uuid = "41CEC6FB-11C3-4C81-849E-E803C6DCC88A"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DCA0F69A-EADC-4DE6-8A75-ED3F32C1C1AF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Books_SwiftUI/Views/BookUI.swift"
+            startingColumnNumber = "33"
+            endingColumnNumber = "39"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
