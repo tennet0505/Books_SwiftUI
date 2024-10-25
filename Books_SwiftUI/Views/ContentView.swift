@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import Kingfisher
 
 struct ContentView: View {
     @StateObject private var tabViewModel = TabViewModel()
@@ -52,24 +53,3 @@ struct ContentView: View {
     }
 }
 
-struct GenreScrollView: View {
-    let genres: [Genre]
-    
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 20) {
-                ForEach(genres, id: \.title) { genre in
-                    VStack {
-                        Image(genre.image)
-                            .resizable()
-                            .frame(width: 80, height: 80)
-                            .cornerRadius(10)
-                        Text(genre.title)
-                            .font(.caption)
-                    }
-                }
-            }
-            .padding(.horizontal)
-        }
-    }
-}

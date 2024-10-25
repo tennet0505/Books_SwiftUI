@@ -48,7 +48,7 @@ struct BooksView: View {
                     } else {
                         
                         VStack(alignment: .leading) {
-                            GenreScrollView(genres: viewModel.fetchBookGenres())
+                            GenreRows(genres: viewModel.fetchBookGenres())
                                 .frame(height: 100)
                             
                             Text("Popular Books")

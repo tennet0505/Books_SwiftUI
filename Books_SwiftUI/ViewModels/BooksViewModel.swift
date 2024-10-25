@@ -10,6 +10,7 @@ import Combine
 
 class BooksViewModel: ObservableObject {
     @Published var books: [Book] = []
+    @Published var booksByGenre: [Book] = []
     @Published var popularBooks: [Book] = []
     @Published var newBooks: [Book] = []
     @Published var currentBook: Book?
@@ -79,13 +80,13 @@ class BooksViewModel: ObservableObject {
     func fetchBookGenres() -> [Genre] {
         // Static array of genres
         let genreArray: [Genre] = [
-            Genre(title: "Fantasy", image: "logoGenre"),
-            Genre(title: "Science Fiction", image: "logoGenre"),
-            Genre(title: "Mystery", image: "logoGenre"),
-            Genre(title: "Horror", image: "logoGenre"),
-            Genre(title: "Biography", image: "logoGenre"),
-            Genre(title: "Humor", image: "logoGenre"),
-            Genre(title: "Novel", image: "logoGenre")
+            Genre(id: "1", title: "Fantasy", image: "logoGenre"),
+            Genre(id: "2", title: "Science Fiction", image: "logoGenre"),
+            Genre(id: "3", title: "Mystery", image: "logoGenre"),
+            Genre(id: "4", title: "Horror", image: "logoGenre"),
+            Genre(id: "5", title: "Biography", image: "logoGenre"),
+            Genre(id: "6", title: "Humor", image: "logoGenre"),
+            Genre(id: "7", title: "Novel", image: "logoGenre")
         ]
         return genreArray
     }
@@ -129,5 +130,10 @@ class BooksViewModel: ObservableObject {
     func fetchFavoritesBooks() {
         let allBooks = CoreDataManager.shared.fetchFavoriteBooks().map{ $0.convertToBook() }
         books = allBooks
+    }
+    
+    func fetchGenreBooks() {
+        let allBooks = CoreDataManager.shared.fetchBooks().map{ $0.convertToBook() }
+        booksByGenre = Array(allBooks.shuffled().prefix(3))
     }
 }

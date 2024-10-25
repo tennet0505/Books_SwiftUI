@@ -19,6 +19,7 @@ struct Book: Identifiable, Decodable, Hashable {
 }
 
 struct Genre: Decodable {
+    var id: String
     var title: String
     var image: String
 }
