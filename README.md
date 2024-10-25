@@ -98,4 +98,5 @@ git clone https://github.com/tennet0505/Books_SwiftUI.git
 ## 6. API
 - **Project uses https://mockapi.io/projects
 
-![image](https://github.com/user-attachments/assets/b4fd5058-07dd-4da2-9800-4ef2d9c1000c)
+## 7. Video
+- **Video walkthrough the app: https://drive.google.com/file/d/1g6rqdaHP9YFkRUoLyeTSRWuqrsGbo0ED/view?usp=sharing
