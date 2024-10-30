@@ -43,6 +43,7 @@ class APIService: APIServiceProtocol {
                 self.saveBooksToDB(books: books)
             })
             .catch { (error: APIError) in
+                print(error)
                 return self.fetchBooksFromDB()
             }
             .eraseToAnyPublisher()

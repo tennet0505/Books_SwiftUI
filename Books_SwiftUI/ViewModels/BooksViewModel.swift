@@ -108,7 +108,7 @@ class BooksViewModel: ObservableObject {
         
         print(book)
         // Update Core Data
-        CoreDataManager.shared.updateBook(book: book, isFavorite: book.isFavorite)
+        CoreDataManager.shared.updateBook(book: book, isFavorite: book.isFavorite ?? false)
         
         // Update the local books array
         if let index = books.firstIndex(where: { $0.id == book.id }) {

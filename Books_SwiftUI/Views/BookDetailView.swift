@@ -71,7 +71,7 @@ struct BookDetailView: View {
                     Spacer()
                     Button {
                         guard var updatedBook = viewModel.currentBook else { return }
-                        updatedBook.isFavorite.toggle()
+                        updatedBook.isFavorite?.toggle()
                         viewModel.toggleFavoriteStatus(for: updatedBook)
                     } label: {
                         Image(systemName: viewModel.currentBook?.isFavorite == true ? "heart.fill" : "heart")

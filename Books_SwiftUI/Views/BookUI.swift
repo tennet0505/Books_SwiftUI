@@ -63,12 +63,12 @@ struct BookRows: View {
                         Spacer()
                         Button {
                             var updatedBook = book
-                            updatedBook.isFavorite.toggle()
+                            updatedBook.isFavorite?.toggle()
                             viewModel.toggleFavoriteStatus(for: updatedBook)
                         } label: {
                             // Bind the button icon to the individual book's isFavorite status
-                            Image(systemName: book.isFavorite ? "heart.fill" : "heart")
-                                .foregroundColor(book.isFavorite ? .red : .gray)
+                            Image(systemName: book.isFavorite ?? false ? "heart.fill" : "heart")
+                                .foregroundColor(book.isFavorite ?? false ? .red : .gray)
                         }
                     }
                     .padding(.top, 10)
